@@ -1,0 +1,40 @@
+{
+  "name": "longinusneo",
+  "version": "1.0.0",
+  "description": "Sistema para rastreamento de objetos",
+  "main": "index.js",
+  "dependencies": {
+    "components": "^0.1.0",
+    "eslint": "^7.19.0",
+    "eslint-config-google": "^0.14.0",
+    "js": "^0.1.0",
+    "material-design-icons": "^3.0.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "parcel": "^1.12.4",
+    "to": "^0.2.9",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedropsfarias/LonginusNeo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedropsfarias/LonginusNeo/issues"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  "homepage": "https://github.com/pedropsfarias/LonginusNeo#readme"
+}
