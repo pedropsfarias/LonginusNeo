@@ -8,13 +8,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="css/app.css">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.css"
-        type="text/css" />
-
     <title>Longinus</title>
 </head>
 
@@ -47,16 +40,24 @@
         <div class="row">
 
             <div class="col s12">
-                <p class="title cyan-text text-darken-4"><i class="material-icons left">fence</i>Criar Limtes</p>
-            </div>
-
-            <div id="map" class="input-field col s12 map rounded-border">
-
+                <p class="title cyan-text text-darken-4"><i class="material-icons left">tap_and_play</i>Criar
+                    Dispositivo
+                </p>
             </div>
 
             <div class="input-field col s12">
                 <input id="nome" type="text" class="validate">
                 <label for="nome">Nome</label>
+            </div>
+
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+                <label>Tipo do Dispositvo</label>
             </div>
 
             <div class="input-field col s12">
@@ -74,25 +75,11 @@
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, {});
-    });
-</script>
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoicGVkcm9wc2ZhcmlhcyIsImEiOiJjaWg5NXQxMWkwdHNjdWprbHloZWF0eDhwIn0.wN3tEcfQsgxUQyn4qq3YNw';
-    var map = new mapboxgl.Map({
-        container: 'map', // container id
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-49.25, -25.45], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-    });
 
-    var draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-            polygon: true,
-            trash: false
-        }
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
+
     });
-    map.addControl(draw);
 </script>
 
 </html>

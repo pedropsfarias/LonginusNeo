@@ -2,7 +2,7 @@ package br.ufpr.longinus;
 
 import br.ufpr.longinus.Auth.AuthMidleware;
 import br.ufpr.longinus.Devices.DeviceService;
-import br.ufpr.longinus.Errors.ErrorService;
+import br.ufpr.longinus.Events.EventService;
 import br.ufpr.longinus.Positions.PositionService;
 import br.ufpr.longinus.Users.UserService;
 
@@ -28,7 +28,7 @@ public class Longinus {
         PositionService positionService = new PositionService();
         UserService userService = new UserService();
         DeviceService deviceService = new DeviceService();
-        ErrorService errorService = new ErrorService();
+        EventService eventService = new EventService();
 
     }
 

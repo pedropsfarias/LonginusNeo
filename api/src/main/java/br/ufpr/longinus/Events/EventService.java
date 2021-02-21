@@ -1,4 +1,4 @@
-package br.ufpr.longinus.Errors;
+package br.ufpr.longinus.Events;
 
 import com.google.gson.Gson;
 
@@ -6,20 +6,20 @@ import java.util.List;
 
 import static spark.Spark.*;
 
-public class ErrorService {
+public class EventService {
 
-    public ErrorService() {
+    public EventService() {
 
-        ErrorController errorController = new ErrorController();
+        EventController eventController = new EventController();
 
         post("/user", (req, response) -> {
 
             Gson g = new Gson();
-            Error e = g.fromJson(req.body(), Error.class);
+            Event e = g.fromJson(req.body(), Event.class);
 
             if (e == null) throw new Exception();
 
-            errorController.create(e);
+            eventController.create(e);
 
             response.type("application/json");
             response.status(201);
@@ -30,7 +30,7 @@ public class ErrorService {
 
         get("/user", (req, response) -> {
 
-            List<Error> users = errorController.list();
+            List<Event> users = eventController.list();
 
             Gson g = new Gson();
             String jsonInString = g.toJson(users);
@@ -42,11 +42,11 @@ public class ErrorService {
         put("/user", (req, response) -> {
 
             Gson g = new Gson();
-            Error e = g.fromJson(req.body(), Error.class);
+            Event e = g.fromJson(req.body(), Event.class);
 
             if (e == null) throw new Exception();
 
-            errorController.update(e);
+            eventController.update(e);
 
             response.type("application/json");
             response.status(201);
@@ -58,11 +58,11 @@ public class ErrorService {
         delete("/user", (req, response) -> {
 
             Gson g = new Gson();
-            Error e = g.fromJson(req.body(), Error.class);
+            Event e = g.fromJson(req.body(), Event.class);
 
             if (e == null) throw new Exception();
 
-            errorController.delete(e);
+            eventController.delete(e);
 
             response.type("application/json");
             response.status(200);

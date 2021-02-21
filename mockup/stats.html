@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/app.css">
+    <title>Longinus</title>
+</head>
+
+<body>
+
+    <nav class="cyan darken-4">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"><img class="nav-logo" src="img/longinus.svg" alt="" srcset=""></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">Javascript</a></li>
+                <li><a href="mobile.html">Mobile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">Javascript</a></li>
+        <li><a href="mobile.html">Mobile</a></li>
+    </ul>
+
+
+    <div class="container rounded-border white mt-1 ">
+
+
+        <div class="row">
+
+            <div class="col s12">
+                <p class="title cyan-text text-darken-4"><i class="material-icons left">show_chart</i>Estatísticas</p>
+            </div>
+
+
+
+
+            <div class="col s12">
+
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header cyan darken-2 white-text"><i
+                                class="material-icons">mobile_friendly</i>Dispositivos
+                            conectados<span class="badge white-text">2</span></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header cyan darken-2 white-text">
+                            <i class="material-icons">mobile_off</i>
+                            Dispositivos desconectados
+                            <span class="badge white-text">3</span>
+                        </div>
+                        <div class="collapsible-body m-0 p-0 pl-3">
+                            <table class="">
+                                <tbody>
+                                    <tr>
+                                        <td class="ellipsis">
+                                            <span><i class="material-icons left">sports_motorsports</i>Moto Preta</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ellipsis">
+                                            <span><i class="material-icons left">directions_car</i>Carro azul</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ellipsis">
+                                            <span><i class="material-icons left">backpack</i>Presente Mãe</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header cyan darken-2 white-text"><i
+                                class="material-icons">location_on</i>Dispositivos
+                            nos limites<span class="badge white-text">1</span></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header cyan darken-2 white-text"><i
+                                class="material-icons">location_off</i>Dispositivos
+                            fora dos limites<span class="badge white-text">1</span></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</body>
+<script src="js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, {});
+
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {});
+    });
+</script>
+
+</html>

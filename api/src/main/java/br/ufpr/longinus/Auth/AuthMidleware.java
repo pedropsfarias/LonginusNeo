@@ -90,7 +90,7 @@ public class AuthMidleware {
 
             response.type("application/json");
             response.status(401);
-            return "{\"success\": false, \"message\": \"Usuário/Senha incorreto(s).\"}";
+            return "{\"success\": false, \"message\": \"Email e/ou senha incorreto(s).\"}";
 
         }
 

@@ -1,13 +1,13 @@
-package br.ufpr.longinus.Errors;
+package br.ufpr.longinus.Events;
 
-public class Error {
+public class Event {
 
     private int id;
     private int errorType;
     private String description;
     private int deviceId;
 
-    public Error() {
+    public Event() {
     }
 
     public int getId() {

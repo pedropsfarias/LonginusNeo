@@ -10,7 +10,9 @@
     "js": "^0.1.0",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^1.0.0-rc.2",
+    "page": "^1.11.6",
     "parcel": "^1.12.4",
+    "sha256": "^0.2.0",
     "to": "^0.2.9",
     "vue": "^2.6.12",
     "vue-hot-reload-api": "^2.3.4"
@@ -35,6 +37,12 @@
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": true
   },
   "homepage": "https://github.com/pedropsfarias/LonginusNeo#readme"
 }

@@ -1,13 +1,12 @@
-package br.ufpr.longinus.Errors;
+package br.ufpr.longinus.Events;
 
 import br.ufpr.longinus.ConnectionFactory;
-import br.ufpr.longinus.Devices.Device;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorDAO {
+public class EventDAO {
 
     private Connection connection;
     private PreparedStatement stmtCreate;
@@ -15,7 +14,7 @@ public class ErrorDAO {
     private PreparedStatement stmtUpdate;
     private PreparedStatement stmtDelete;
 
-    public ErrorDAO() throws SQLException {
+    public EventDAO() throws SQLException {
 
         this.connection = ConnectionFactory.getConnection();
         this.stmtCreate = this.connection.prepareStatement("insert into errors (device_type,description,device_id) values (?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -25,31 +24,31 @@ public class ErrorDAO {
 
     }
 
-    public void create(Error error) throws SQLException {
+    public void create(Event event) throws SQLException {
 
-        this.stmtCreate.setInt(1, error.getErrorType());
-        this.stmtCreate.setString(2, error.getDescription());
-        this.stmtCreate.setInt(3, error.getDeviceId());
+        this.stmtCreate.setInt(1, event.getErrorType());
+        this.stmtCreate.setString(2, event.getDescription());
+        this.stmtCreate.setInt(3, event.getDeviceId());
 
         this.stmtCreate.execute();
 
         ResultSet rs = stmtCreate.getGeneratedKeys();
         rs.next();
         int i = rs.getInt(1);
-        error.setId(i);
+        event.setId(i);
 
     }
 
-    public List<Error> list(int userId) throws SQLException {
+    public List<Event> list(int userId) throws SQLException {
 
         ResultSet rs = null;
         this.stmtList.setInt(1, userId);
         rs = this.stmtList.executeQuery();
-        List<Error> devices = new ArrayList();
+        List<Event> devices = new ArrayList();
 
         while (rs.next()) {
 
-            Error device = new Error();
+            Event device = new Event();
             device.setId(rs.getInt("id"));
             device.setDescription(rs.getString("description"));
             device.setErrorType(rs.getInt("error_type"));
@@ -63,7 +62,7 @@ public class ErrorDAO {
 
     }
 
-    public boolean delete(Error device) throws SQLException {
+    public boolean delete(Event device) throws SQLException {
 
         int row = -1;
         this.stmtDelete.setInt(1, device.getId());
@@ -75,7 +74,7 @@ public class ErrorDAO {
 
     }
 
-    public boolean update(Error device) throws SQLException {
+    public boolean update(Event device) throws SQLException {
 
         int row = -1;
 
