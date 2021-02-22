@@ -4,6 +4,7 @@
   "description": "Sistema para rastreamento de objetos",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.21.1",
     "components": "^0.1.0",
     "eslint": "^7.19.0",
     "eslint-config-google": "^0.14.0",
@@ -23,7 +24,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "dev:android": "parcel build src/index.html -d app/www --public-url . && cd app && cordova run android --target=emulator-5554"
   },
   "repository": {
     "type": "git",

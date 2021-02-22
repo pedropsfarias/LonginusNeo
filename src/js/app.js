@@ -33,6 +33,7 @@ export default class App {
     _registerRoutes() {
 
         page('/login', () => this._vue.ViewComponent = require('../pages/login-page.vue').default);
+        page('/position', () => this._vue.ViewComponent = require('../pages/position-page.vue').default);
         page('/devices', () => this._vue.ViewComponent = require('../pages/devices-page.vue').default);
 
         page('*', () => this._vue.ViewComponent = require('../pages/404.vue').default);

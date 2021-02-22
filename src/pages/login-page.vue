@@ -50,7 +50,7 @@
                 </div>
             </form>
         </div>
-        <loaderComponent
+        <loader-component
             v-bind:isActive="showLoader"
             v-bind:message="loaderMessage"
         />
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import sha256 from 'sha256';
 import M from 'materialize-css';
 import helper from '../js/helpers';
@@ -78,7 +79,7 @@ export default {
             loaderMessage: '',
         };
     },
-    mounted() {
+    mounted: function() {
         M.AutoInit();
         this.validate();
     },
@@ -91,8 +92,8 @@ export default {
         },
         login: function() {
             this.showLoader = true;
-            const url = config.serverUrl + '/auth';
             const options = {
+                url: config.serverUrl + '/auth',
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -102,13 +103,10 @@ export default {
                 },
             };
 
-            console.log('a');
-
-            fetch(url, options)
-                .then(response => response.json())
+            axios(options)
                 .then(response => {
-                    if (response.success) {
-                        app.token = response.token;
+                    if (response.data) {
+                        app.token = response.data.token;
                         page.redirect('/devices');
                     } else {
                         this.errors = true;
@@ -117,8 +115,13 @@ export default {
                 })
                 .catch(e => {
                     this.errors = true;
-                    this.errorMessage =
-                        'Não foi possível estabelecer conexão com o servidor. Contacte o administrador.';
+
+                    if (e.response.data) {
+                        this.errorMessage = e.response.data.message;
+                    } else {
+                        this.errorMessage =
+                            'Não foi possível estabelecer conexão com o servidor. Contacte o administrador.';
+                    }
                 })
                 .finally(() => {
                     this.showLoader = false;

@@ -87,13 +87,6 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
-    opacity: 0;
-}
 .full-logo {
     filter: invert(9%);
 }

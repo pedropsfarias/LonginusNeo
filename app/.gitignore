@@ -10,6 +10,7 @@ bin/*
 !/plugins/fetch.json
 plugins/*
 platforms/*
+www/*
 
 ### Cordova ###
 # gitignore template for the Cordova framework
@@ -105,6 +106,8 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
+
+
 
 # Next.js build output
 .next
