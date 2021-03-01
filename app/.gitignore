@@ -10,7 +10,6 @@ bin/*
 !/plugins/fetch.json
 plugins/*
 platforms/*
-www/*
 
 ### Cordova ###
 # gitignore template for the Cordova framework
