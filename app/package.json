@@ -17,6 +17,7 @@
     "cordova-browser": "^6.0.0",
     "cordova-plugin-android-permissions": "^1.1.2",
     "cordova-plugin-browsersync-gen2": "^1.1.7",
+    "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-geolocation": "^4.1.0"
   },
   "devDependencies": {
@@ -29,7 +30,8 @@
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
-      "cordova-plugin-browsersync-gen2": {}
+      "cordova-plugin-browsersync-gen2": {},
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "android",

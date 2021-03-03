@@ -1,7 +1,11 @@
 define([], function () { // jshint ignore:line
 
     return {
-        serverUrl: 'http://localhost:4567'
+        serverUrl: 'http://localhost:4567',
+        permissions: [
+
+
+        ]
     }
 
 });
