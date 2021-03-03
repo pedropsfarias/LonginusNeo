@@ -1,40 +1,43 @@
 define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, page, routes, store) { // jshint ignore:line
 
-    return {
+    class App {
 
-        token: null,
-        _vue: null,
+        token = null;
+        vue = null;
 
-        initialize: function () {
+        constructor() { }
+
+
+        initialize() {
 
             this._getStoredParams();
             this._createVueInstance();
             this._registerRoutes();
-            // this._checkPermissions();
+            this._checkPermissions();
             this._handleURL();
 
-        },
+        };
 
-        _createVueInstance: function () {
+        _createVueInstance() {
 
             this._vue = new Vue({
                 el: '#app',
                 data: {
                     ViewComponent: { render: h => h('div', 'loading...') }
                 },
-                render(h) { return h(this.ViewComponent) }
+                render(h) { return h(this.ViewComponent); }
             });
 
-        },
+        };
 
-        _registerRoutes: function () {
+        _registerRoutes() {
 
             for (let i = 0; i < routes.length; i++) {
                 const route = routes[i];
                 page(route.path, () => {
                     require([route.component], (page) => {
                         this._vue.ViewComponent = page;
-                    })
+                    });
                 });
             }
 
@@ -42,21 +45,21 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
                 hashbang: true
             });
 
-        },
+        };
 
-        _getStoredParams: function () {
+        _getStoredParams() {
 
             this.token = localStorage.getItem('token');
 
-        },
+        };
 
-        setStoredParams: function () {
+        setStoredParams() {
 
             localStorage.setItem('token', this.token);
 
-        },
+        };
 
-        _handleURL: function () {
+        _handleURL() {
 
             if (this.token) {
 
@@ -66,7 +69,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
                 } else {
 
-                    page('/devices');
+                    page.redirect('/devices');
 
                 }
 
@@ -76,11 +79,11 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
             }
 
-        },
+        };
 
-        _checkPermissions: function () {
+        _checkPermissions() {
 
-            if (device.platform != 'browser') {
+            if (typeof cordova != undefined && cordova.platformId != 'browser') {
 
                 const permissionsList = [
                     'android.permission.ACCESS_COARSE_LOCATION',
@@ -89,21 +92,13 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
                 ];
 
                 let permissions = cordova.plugins.permissions;
-                permissions.hasPermission(permissionsList, function (status) {
+                permissions.hasPermission(permissionsList, status => {
 
-                    if (status.hasPermission) {
+                    if (!status.hasPermission) {
 
-                        //page.redirect('/position');
+                        permissions.requestPermissions(permissionsList, () => { }, () => {
 
-                    } else {
-
-                        permissions.requestPermissions(permissionsList, function () {
-
-                            //page.redirect('/login');
-
-                        }, function () {
-
-                            // page.redirect('/devices');
+                            this._checkPermissions();
 
                         });
 
@@ -111,15 +106,15 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
                 });
 
-            } else {
-
-                //page.redirect('/login');
-
             }
 
-        }
+        };
+
+
 
     }
+
+    return new App();
 
 
 

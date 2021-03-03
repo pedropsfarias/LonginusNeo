@@ -106,8 +106,6 @@ typings/
 .cache
 .parcel-cache
 
-
-
 # Next.js build output
 .next
 
