@@ -247,3 +247,25 @@ body,
 .full-logo {
   filter: invert(9%);
 }
+
+.map-bg {
+  background: url(../img/map.png) center center;
+  background-size: cover;
+}
+
+.toggle-map {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #fff;
+  border: 1px solid rgb(121, 121, 121);
+  border-radius: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 0.3rem;
+  z-index: 99;
+}
+
+.bold {
+  font-weight: 500;
+}

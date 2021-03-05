@@ -6,6 +6,10 @@ define([], function () { // jshint ignore:line
             path: '/login'
         },
         {
+            component: 'position-page/position-page',
+            path: '/position'
+        },
+        {
             component: 'not-found-page/not-found-page',
             path: '*'
         }

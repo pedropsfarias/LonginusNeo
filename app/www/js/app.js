@@ -3,10 +3,10 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
     class App {
 
         token = null;
-        vue = null;
+        _vue = null;
+        _watchID = null;
 
         constructor() { }
-
 
         initialize() {
 
@@ -16,7 +16,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
             this._checkPermissions();
             this._handleURL();
 
-        };
+        }
 
         _createVueInstance() {
 
@@ -28,7 +28,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
                 render(h) { return h(this.ViewComponent); }
             });
 
-        };
+        }
 
         _registerRoutes() {
 
@@ -45,19 +45,19 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
                 hashbang: true
             });
 
-        };
+        }
 
         _getStoredParams() {
 
             this.token = localStorage.getItem('token');
 
-        };
+        }
 
         setStoredParams() {
 
             localStorage.setItem('token', this.token);
 
-        };
+        }
 
         _handleURL() {
 
@@ -69,7 +69,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
                 } else {
 
-                    page.redirect('/devices');
+                    page.redirect('/position');
 
                 }
 
@@ -79,7 +79,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
             }
 
-        };
+        }
 
         _checkPermissions() {
 
@@ -108,14 +108,23 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
             }
 
-        };
+        }
 
+        initPositionWatch(success, failure) {
 
+            this._watchID = navigator.geolocation.watchPosition(position => {
+                success(position);
+            }, e => {
+                failure(e);
+            }, {
+                maximumAge: 3000,
+                timeout: 5000,
+                enableHighAccuracy: true
+            });
+        }
 
     }
 
     return new App();
-
-
 
 });

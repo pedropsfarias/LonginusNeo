@@ -1,0 +1,55 @@
+<div class="container rounded-border white mt-1 ">
+
+    <div class="row">
+
+        <div class="col s12">
+            <p class="title cyan-text text-darken-4"><i class="material-icons left ">gps_fixed</i>Rastreamento</p>
+        </div>
+
+        <div id="map" class="input-field col s12 map rounded-border map-bg">
+            <div class="toggle-map">
+                <i class="material-icons left">visibility</i>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="bold">Latitude</td>
+                        <td>{{latitude}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Longitude</td>
+                        <td>{{longitude}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Altitude</td>
+                        <td>{{altitude}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Precisão</td>
+                        <td>{{accuracy}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Direção</td>
+                        <td>{{heading}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Velocidade</td>
+                        <td>{{speed}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Timestamp</td>
+                        <td>{{timestamp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+    <loader-component v-bind:isActive="showLoader" v-bind:message="loaderMessage" />
+</div>

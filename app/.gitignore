@@ -138,3 +138,5 @@ dist
 .vscode-test
 
 # End of https://www.toptal.com/developers/gitignore/api/cordova,apachecordova,node
+
+www/js/config.js

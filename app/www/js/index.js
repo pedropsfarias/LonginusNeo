@@ -12,6 +12,7 @@ requirejs.config({
         sha256: '../lib/sha256/sha256',
         page: '../lib/page/page',
         store: '../lib/store/store.min',
+        mapbox: '../lib/mapbox-gl/mapbox-gl',
 
     }
 });
