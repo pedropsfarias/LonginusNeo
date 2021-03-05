@@ -4,7 +4,8 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
         token = null;
         _vue = null;
-        _watchID = null;
+        deviceId = 1; //TODO
+        watchID = null;
 
         constructor() { }
 
@@ -112,16 +113,32 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
         initPositionWatch(success, failure) {
 
-            this._watchID = navigator.geolocation.watchPosition(position => {
+            this.watchID = navigator.geolocation.watchPosition(position => {
                 success(position);
             }, e => {
                 failure(e);
             }, {
                 maximumAge: 3000,
-                timeout: 5000,
+                timeout: 10000,
                 enableHighAccuracy: true
             });
+
         }
+
+        stopPositionWatch() {
+
+            navigator.geolocation.clearWatch(this.watchID);
+            this.watchID = null;
+
+        }
+
+        registerError(e) {
+
+            //TODO
+            console.log(e)
+
+        }
+
 
     }
 

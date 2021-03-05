@@ -269,3 +269,13 @@ body,
 .bold {
   font-weight: 500;
 }
+
+.fixed-menu {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.container {
+  padding-top: 4rem;
+}
