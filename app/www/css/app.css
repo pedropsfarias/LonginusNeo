@@ -279,3 +279,7 @@ body,
 .container {
   padding-top: 4rem;
 }
+
+.message-top {
+  z-index: 9999;
+}

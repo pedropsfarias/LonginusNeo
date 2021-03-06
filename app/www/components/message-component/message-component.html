@@ -1,0 +1,20 @@
+<transition name="fade">
+    <div v-if="isActive" class="full grey lighten-5 ontop message-top">
+        <div class="container rounded-border  mt-1 ">
+            <div class="row">
+                <div class="col s12">
+                    <div class=" card gray lighten-5">
+                        <div class="card-content gray-text">
+                            <span class="card-title">{{title}}</span>
+                            <p>{{message}}</p>
+                        </div>
+                        <div class="card-action gray-text pb-1">
+                            <a class="waves-effect waves-teal btn-flat " href="#">Cancelar</a>
+                            <a class="right waves-effect waves-light btn" href="#">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</transition>
