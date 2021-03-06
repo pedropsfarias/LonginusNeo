@@ -7,6 +7,7 @@ body,
   padding: 0;
   margin: 0;
   border: 0;
+  user-select: none;
 }
 
 /* Like Bootstrap */
@@ -282,4 +283,21 @@ body,
 
 .message-top {
   z-index: 9999;
+}
+
+.transparency-50 {
+  opacity: 0.5;
+}
+
+.transparency-0 {
+  opacity: 1 !important;
+}
+
+.msg-bg {
+  z-index: 9999;
+  background: #ff030311;
+}
+
+.w-100 {
+  width: 100%;
 }

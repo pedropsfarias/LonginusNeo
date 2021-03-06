@@ -1,5 +1,5 @@
 define([
-    'text!list-device-page/list-device-page.html',
+    'text!create-device-page/create-device-page.html',
     'vue',
     'axios',
     'loader-component/loader-component',

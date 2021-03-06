@@ -4,7 +4,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
         token = null;
         _vue = null;
-        deviceId = 1; //TODO
+        deviceId = null;
         watchID = null;
 
         constructor() { }
