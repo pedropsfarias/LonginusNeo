@@ -2,6 +2,7 @@ package br.ufpr.longinus.Devices;
 
 import com.google.gson.Gson;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static spark.Spark.*;
@@ -66,7 +67,17 @@ public class DeviceService {
 
             if (d == null) throw new Exception();
 
-            deviceController.delete(d);
+            try{
+
+                deviceController.delete(d);
+
+            } catch (SQLException e) {
+
+                response.type("application/json");
+                response.status(200);
+                return "{\"success\": false}";
+
+            }
 
             response.type("application/json");
             response.status(200);

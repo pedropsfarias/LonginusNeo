@@ -37,8 +37,7 @@ define([
                     showLoader: true,
                     loaderMessage: '',
                     devices: null,
-                    //isAndroid: cordova.platformId != 'browser',
-                    isAndroid: true,
+                    isAndroid: cordova.platformId != 'browser',
                     intervalCount: 0,
                     interval: 0
 
@@ -89,15 +88,20 @@ define([
                         });
                 },
 
+                persistDevice(device) {
+
+                    app.device = device;
+                    page.redirect('/device')
+
+                },
+
                 start(device) {
 
                     if (!this.interval) {
                         this.interval = setInterval(() => {
 
                             this.intervalCount++;
-                            console.log(this.intervalCount)
-
-                            if (this.intervalCount > 6) {
+                            if (this.intervalCount > 4) {
 
                                 this.$refs.messageBox.show({
                                     title: 'Excluir dispostivo?',
@@ -105,7 +109,7 @@ define([
                                     confirmText: 'Sim',
                                     cancelText: 'Não'
                                 }).then(() => {
-                                    this.deleteDevice();
+                                    this.deleteDevice(device);
                                 });
 
                                 this.stop();
@@ -125,11 +129,8 @@ define([
 
                 startLocation(device) {
 
-                    console.log(device)
-
                     app.deviceId = device.id;
                     page.redirect('/position');
-
 
                 },
 
@@ -150,7 +151,15 @@ define([
                     axios(options)
                         .then(response => {
                             if (response.status < 400) {
-                                this.getDevices();
+
+                                if (response.data.success) {
+                                    this.getDevices();
+                                } else {
+                                    this.$refs.messageBox.alert({
+                                        title: 'Não foi possível excluir o dispositivo.',
+                                        message: 'Existem dados de rastreamento atrelados ao dispositivo.'
+                                    })
+                                }
                             } else {
                                 app.registerError({
                                     level: 0,

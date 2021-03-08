@@ -29,7 +29,7 @@ public class DeviceDAO {
 
     public void create(Device device) throws SQLException {
 
-        this.stmtCreate.setInt(1, device.getDeviceType());
+        this.stmtCreate.setString(1, device.getDeviceType());
         this.stmtCreate.setString(2, device.getDescription());
         this.stmtCreate.setInt(3, device.getUserId());
 
@@ -54,7 +54,7 @@ public class DeviceDAO {
             Device device = new Device();
             device.setId(rs.getInt("id"));
             device.setDescription(rs.getString("description"));
-            device.setDeviceType(rs.getInt("device_type"));
+            device.setDeviceType(rs.getString("device_type"));
             device.setUserId(userId);
 
             devices.add(device);
@@ -66,6 +66,7 @@ public class DeviceDAO {
     }
 
     public boolean delete(Device device) throws SQLException {
+
 
         int row = -1;
         this.stmtDelete.setInt(1, device.getId());
@@ -81,7 +82,7 @@ public class DeviceDAO {
 
         int row = -1;
 
-        this.stmtUpdate.setInt(1, device.getDeviceType());
+        this.stmtUpdate.setString(1, device.getDeviceType());
         this.stmtUpdate.setString(2, device.getDescription());
         this.stmtUpdate.setInt(3, device.getId());
 

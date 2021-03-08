@@ -27,134 +27,102 @@ define([
         mapboxgl) { // jshint ignore:line
 
         return Vue.component('list-device-page', {
+
             components: {
                 'loader-component': loaderComponent,
                 'menu-component': menuComponent,
                 'message-component': messageComponent,
             },
+
             data: function () {
                 return {
                     showLoader: true,
                     loaderMessage: '',
-                    devices: null,
-                    //isAndroid: cordova.platformId != 'browser',
-                    isAndroid: true,
-                    intervalCount: 0,
-                    interval: 0
-
-
+                    deviceTypeList: config.deviceTypes,
+                    deviceType: 'local_shipping',
+                    description: '',
+                    isInvalid: true
                 };
             },
+
             mounted: function () {
 
-                M.AutoInit();
-                helper.setWindowTitle('Obter posição - Longinus')
-                this.getDevices();
+                new Promise((r) => {
+                    helper.setWindowTitle('Criar dispositivo - Longinus')
+                    this.getDevice();
+                    this.validate();
+                    r();
+                }).then(() => {
+                    M.AutoInit();
+                    M.updateTextFields();
+                })
 
             },
 
             methods: {
 
-                getDevices() {
+                validate() {
 
-                    const options = {
-                        url: config.serverUrl + '/device',
-                        method: 'GET',
-                        withCredentials: false,
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json;charset=UTF-8',
-                            token: app.token,
-                        }
-                    };
+                    this.isInvalid = this.description == '';
 
-                    axios(options)
-                        .then(response => {
-                            if (response.status < 400) {
-                                this.devices = response.data;
-                            } else {
-                                app.registerError({
-                                    level: 0,
-                                    message: 'Não foi possível resgatar os dispositivos.',
-                                    raw: response
-                                });
-                            }
-                        })
-                        .catch(e => {
-                            app.registerError({
-                                level: 0,
-                                message: 'Não foi possível conectar ao servidor. Sem conexão de internet.',
-                                raw: e
-                            });
-                        });
                 },
 
-                start(device) {
+                getDevice() {
 
-                    if (!this.interval) {
-                        this.interval = setInterval(() => {
+                    if (app.device) {
 
-                            this.intervalCount++;
-                            console.log(this.intervalCount)
+                        this.description = app.device.description;
+                        this.deviceType = app.device.deviceType;
 
-                            if (this.intervalCount > 6) {
+                    } else {
 
-                                this.$refs.messageBox.show({
-                                    title: 'Excluir dispostivo?',
-                                    message: `Deseja excluir o dispositivo "${device.description}"?`,
-                                    confirmText: 'Sim',
-                                    cancelText: 'Não'
-                                }).then(() => {
-                                    this.deleteDevice();
-                                });
+                        this.description = '';
+                        this.deviceType = 'shield';
 
-                                this.stop();
-
-                            }
-                        }, 100)
                     }
-                },
-
-                stop() {
-
-                    clearInterval(this.interval);
-                    this.intervalCount = 0;
-                    this.interval = false;
 
                 },
 
-                startLocation(device) {
+                save() {
 
-                    console.log(device)
+                    let device = {
+                        description: this.description,
+                        deviceType: this.deviceType,
+                        userId: app.user.id
+                    };
+                    let method = 'POST';
 
-                    app.deviceId = device.id;
-                    page.redirect('/position');
+                    if (app.device) {
+                        device.id = app.device.id;
+                        method = 'PUT';
+                    }
 
+                    this.persistDevice(device, method);
 
                 },
 
-                deleteDevice(device) {
+                persistDevice(data, method) {
 
                     const options = {
                         url: config.serverUrl + '/device',
-                        method: 'DELETE',
                         withCredentials: false,
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json;charset=UTF-8',
                             token: app.token,
                         },
-                        data: device
+                        method,
+                        data
                     };
 
                     axios(options)
                         .then(response => {
                             if (response.status < 400) {
-                                this.getDevices();
+                                page.redirect('/devices');
                             } else {
                                 app.registerError({
                                     level: 0,
-                                    message: 'Não foi possível apagar o dispositivo.',
+                                    message: 'Não foi possível criar o dispositivo.',
                                     raw: response
                                 });
                             }

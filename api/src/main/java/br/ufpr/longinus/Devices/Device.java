@@ -3,7 +3,7 @@ package br.ufpr.longinus.Devices;
 public class Device {
 
     private int id;
-    private int deviceType;
+    private String deviceType;
     private String description;
     private int userId;
 
@@ -18,11 +18,11 @@ public class Device {
         this.id = id;
     }
 
-    public int getDeviceType() {
+    public String getDeviceType() {
         return deviceType;
     }
 
-    public void setDeviceType(int deviceType) {
+    public void setDeviceType(String deviceType) {
         this.deviceType = deviceType;
     }
 

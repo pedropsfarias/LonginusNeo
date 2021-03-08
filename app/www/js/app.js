@@ -6,6 +6,9 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
         _vue = null;
         deviceId = null;
         watchID = null;
+        user = {
+            id: 1
+        } //TODO
 
         constructor() { }
 

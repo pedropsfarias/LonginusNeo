@@ -8,10 +8,22 @@
                             <span class="card-title">{{title}}</span>
                             <p>{{message}}</p>
                         </div>
-                        <div class="card-action gray-text pb-1">
-                            <a class="waves-effect waves-teal btn-flat " v-on:click="cancel"><span
-                                    class="black-text text-darken-2">{{cancelText}}</span></a>
-                            <a class="right waves-effect waves-light btn" v-on:click="confirm">{{confirmText}}</a>
+                        <div class="card-action gray-text">
+                            <div class="row p-0 m-0">
+                                <div class="col s6">
+                                    <a v-bind:class="{ 'd-none': disableCancel}" v-on:click="cancel"
+                                        class="waves-effect waves-teal btn-flat ">
+                                        <span class="black-text text-darken-2">
+                                            {{cancelText}}
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col s6">
+                                    <a v-on:click="confirm" class="right waves-effect waves-light btn">
+                                        {{confirmText}}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

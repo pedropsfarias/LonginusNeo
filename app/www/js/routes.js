@@ -10,6 +10,10 @@ define([], function () { // jshint ignore:line
             path: '/devices'
         },
         {
+            component: 'create-device-page/create-device-page',
+            path: '/device'
+        },
+        {
             component: 'login-page/login-page',
             path: '/login'
         },

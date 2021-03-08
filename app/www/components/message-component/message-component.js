@@ -8,6 +8,7 @@ define(['vue', 'materialize', 'text!message-component/message-component.html'], 
                 message: '',
                 confirmText: '',
                 cancelText: '',
+                disableCancel: true,
                 events: {
                     onConfirm: null,
                     onCancel: null
@@ -22,6 +23,35 @@ define(['vue', 'materialize', 'text!message-component/message-component.html'], 
                 this.message = c.message;
                 this.confirmText = c.confirmText || 'OK';
                 this.cancelText = c.cancelText || 'Cancelar';
+                this.disableCancel = false;
+
+                return new Promise((confirmResponse, cancelResponse) => {
+
+                    this.events.onConfirm = () => {
+
+                        this.isActive = false;
+                        confirmResponse();
+
+                    }
+
+                    this.events.onCancel = () => {
+
+                        this.isActive = false;
+                        cancelResponse();
+
+                    }
+
+                })
+
+            },
+
+            alert: function (c) {
+
+                this.isActive = true;
+                this.title = c.title;
+                this.message = c.message;
+                this.confirmText = c.confirmText || 'OK';
+                this.disableCancel = true;
 
                 return new Promise((confirmResponse, cancelResponse) => {
 

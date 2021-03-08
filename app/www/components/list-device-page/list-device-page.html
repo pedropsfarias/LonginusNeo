@@ -18,9 +18,9 @@
                         <tr v-for="device in devices">
                             <td @mousedown="start(device)" @mouseleave="stop" @mouseup="stop"
                                 @touchstart="start(device)" @touchend="stop" @touchcancel="stop"
-                                class="ellipsis waves-effect w-100">
+                                @click="persistDevice(device)" class="ellipsis waves-effect w-100">
                                 <span class="">
-                                    <i class="material-icons grey-text left">sports_motorsports</i>
+                                    <i class="material-icons grey-text left">{{device.deviceType}}</i>
                                     {{device.description}}
                                     <i @click="startLocation(device)" v-if="isAndroid"
                                         class="material-icons right cyan-text text-darken-4">play_arrow</i>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="fixed-action-btn">
-                <a class="btn-floating btn-large cyan darken-4">
+                <a @click="persistDevice()" class="btn-floating btn-large cyan darken-4">
                     <i class="large material-icons">add</i>
                 </a>
             </div>
