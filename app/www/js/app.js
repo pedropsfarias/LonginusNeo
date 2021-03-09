@@ -6,7 +6,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
         _vue = null;
         deviceId = null;
         watchID = null;
-        user = {
+        loggedUser = {
             id: 1
         } //TODO
 
@@ -88,14 +88,15 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
         _handleStatusBar() {
 
-            if (typeof cordova != undefined && cordova.platformId == 'android') {
+            if (cordova.platformId == 'android') {
                 StatusBar.backgroundColorByHexString("#006064");
             }
+
         }
 
         _checkPermissions() {
 
-            if (typeof cordova != undefined && cordova.platformId != 'browser') {
+            if (cordova.platformId != 'browser') {
 
                 const permissionsList = [
                     'android.permission.ACCESS_COARSE_LOCATION',

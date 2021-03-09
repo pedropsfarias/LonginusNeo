@@ -1,0 +1,54 @@
+<div class="full">
+    <menu-component></menu-component>
+    <message-component ref='messageBox'></message-component>
+
+    <div class="container rounded-border white mt-1 ">
+
+
+        <div class="row">
+
+            <div class="col s12">
+                <p class="title cyan-text text-darken-4"><i class="material-icons left">group_add</i>Criar Usuário</p>
+            </div>
+
+            <div class="input-field col s12">
+                <input v-model="name" id="nome" type="text" class="validate">
+                <label for="nome">Nome</label>
+                <span v-bind:class="{ 'd-none': disableErrorName}" class="helper-text red-text">Preencha com um
+                    nome.</span>
+            </div>
+
+            <div class="input-field col s12">
+                <input v-model="email" id="email" type="email" class="validate">
+                <label for="email">Email</label>
+                <span v-bind:class="{ 'd-none': disableErrorEmail}" class="helper-text red-text">Preencha com um email
+                    válido.</span>
+            </div>
+
+            <div class="input-field col s12">
+                <input v-model="pass1" id="pass" type="password" class="validate">
+                <label for="pass">Senha</label>
+                <span v-bind:class="{ 'd-none': disableErrorPass1}" class="helper-text red-text">Preencha com uma senha
+                    válida.</span>
+            </div>
+
+            <div class="input-field col s12">
+                <input v-model="pass2" id="pass2" type="password" class="validate">
+                <label for="pass2">Repetir Senha</label>
+                <span v-bind:class="{ 'd-none': disableErrorPass}" class="helper-text red-text">As senhas não
+                    coincidem.</span>
+            </div>
+
+            <div class="input-field col s12">
+                <a @click="save" class="waves-effect waves-light btn float-right"><i
+                        class="material-icons left">add</i>Salvar</a>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <loader-component v-bind:isActive="showLoader" v-bind:message="loaderMessage" />
+</div>

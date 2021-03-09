@@ -14,6 +14,14 @@ define([], function () { // jshint ignore:line
             path: '/device'
         },
         {
+            component: 'create-user-page/create-user-page',
+            path: '/user'
+        },
+        {
+            component: 'list-user-page/list-user-page',
+            path: '/users'
+        },
+        {
             component: 'login-page/login-page',
             path: '/login'
         },

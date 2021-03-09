@@ -29,6 +29,13 @@ public class UserController {
 
     }
 
+    public void updateWithHash(User user) throws SQLException {
+
+        UserDAO userDao = new UserDAO();
+        userDao.updateWithHash(user);
+
+    }
+
     public void delete(User user) throws SQLException {
 
         UserDAO userDao = new UserDAO();

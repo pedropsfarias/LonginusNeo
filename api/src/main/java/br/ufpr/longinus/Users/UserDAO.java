@@ -12,6 +12,7 @@ public class UserDAO {
     private PreparedStatement stmtCreate;
     private PreparedStatement stmtList;
     private PreparedStatement stmtUpdate;
+    private PreparedStatement stmtUpdate2;
     private PreparedStatement stmtUpdateHash;
     private PreparedStatement stmtDelete;
     private PreparedStatement stmtGetUserLogin;
@@ -23,6 +24,7 @@ public class UserDAO {
         this.stmtList = this.connection.prepareStatement("select id, name, email from users");
         this.stmtGetUserLogin = this.connection.prepareStatement("select id, name from users where email = ? and hash = ?");
         this.stmtUpdate = this.connection.prepareStatement("update users set name=?, email=? where id=?;");
+        this.stmtUpdate2 = this.connection.prepareStatement("update users set name=?, email=?, hash=? where id=?;");
         this.stmtUpdateHash = this.connection.prepareStatement("update users set hash=? where id=? and hash=?;");
         this.stmtDelete = this.connection.prepareStatement("delete from users where id=?;");
 
@@ -115,6 +117,22 @@ public class UserDAO {
         return true;
 
     }
+
+    public boolean updateWithHash(User user) throws SQLException {
+
+        int row = -1;
+        this.stmtUpdate2.setString(1, user.getName());
+        this.stmtUpdate2.setString(2, user.getEmail());
+        this.stmtUpdate2.setString(3, user.getHash());
+        this.stmtUpdate2.setInt(4, user.getId());
+        row = this.stmtUpdate2.executeUpdate();
+
+        if (row == -1) return false;
+
+        return true;
+
+    }
+
 
     public boolean changePassword(User user, String hash, String newhash) throws SQLException {
 

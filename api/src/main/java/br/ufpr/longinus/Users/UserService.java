@@ -1,7 +1,9 @@
 package br.ufpr.longinus.Users;
 
 import com.google.gson.Gson;
+import com.j256.ormlite.misc.SqlExceptionUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static spark.Spark.*;
@@ -19,11 +21,20 @@ public class UserService {
 
             if (u == null) throw new Exception();
 
-            userController.create(u);
+            try{
+
+                userController.create(u);
+
+            } catch (SQLException e ){
+
+                response.type("application/json");
+                response.status(200);
+                return "{\"success\": false, \"message\": \"Existe um usuário com o email informado.\" }";
+
+            }
 
             response.type("application/json");
             response.status(201);
-
             return "{\"success\": true}";
 
         });
@@ -46,7 +57,21 @@ public class UserService {
 
             if (u == null) throw new Exception();
 
-            userController.update(u);
+            try{
+
+                if(u.getHash() == null){
+                    userController.update(u);
+                } else {
+                    userController.updateWithHash(u);
+                }
+
+            } catch (SQLException e ){
+
+                response.type("application/json");
+                response.status(200);
+                return "{\"success\": false, \"message\": \"Existe um usuário com o email informado.\" }";
+
+            }
 
             response.type("application/json");
             response.status(201);
@@ -62,7 +87,17 @@ public class UserService {
 
             if (u == null) throw new Exception();
 
-            userController.delete(u);
+            try{
+
+                userController.delete(u);
+
+            } catch (SQLException e ){
+
+                response.type("application/json");
+                response.status(200);
+                return "{\"success\": false, \"message\": \"Existem dispositivos associados a esse usuário.\" }";
+
+            }
 
             response.type("application/json");
             response.status(200);

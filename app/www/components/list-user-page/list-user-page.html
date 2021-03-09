@@ -1,0 +1,45 @@
+<div class="full">
+    <menu-component></menu-component>
+    <message-component ref='messageBox'></message-component>
+
+    <div class="container rounded-border white mt-1 ">
+
+
+        <div class="row">
+
+            <div class="col s12">
+                <p class="title cyan-text text-darken-4"><i class="material-icons left">group</i>Usuários</p>
+            </div>
+
+            <div class="col s12">
+
+                <table>
+                    <tbody>
+                        <tr v-for="user in users">
+                            <td @mousedown="start(user)" @mouseleave="stop" @mouseup="stop" @touchstart="start(user)"
+                                @touchend="stop" @touchcancel="stop" @click="persistUser(user)"
+                                class="ellipsis waves-effect w-100">
+                                <span class="">
+                                    <i class="material-icons grey-text left">person</i>
+                                    {{user.name}}
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="fixed-action-btn">
+                <a @click="persistUser()" class="btn-floating btn-large cyan darken-4">
+                    <i class="large material-icons">add</i>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <loader-component v-bind:isActive="showLoader" v-bind:message="loaderMessage" />
+</div>

@@ -1,5 +1,5 @@
 define([
-    'text!create-device-page/create-device-page.html',
+    'text!create-user-page/create-user-page.html',
     'vue',
     'axios',
     'loader-component/loader-component',
@@ -26,7 +26,7 @@ define([
         app,
         mapboxgl) { // jshint ignore:line
 
-        return Vue.component('list-device-page', {
+        return Vue.component('create-user-page', {
 
             components: {
                 'loader-component': loaderComponent,
@@ -38,20 +38,24 @@ define([
                 return {
                     showLoader: true,
                     loaderMessage: '',
-                    deviceTypeList: config.deviceTypes,
-                    deviceType: 'local_shipping',
-                    description: '',
                     isInvalid: true,
-                    action: 'Criar'
+                    action: 'Criar',
+                    name: '',
+                    email: '',
+                    pass1: '',
+                    pass2: '',
+                    disableErrorPass: true,
+                    disableErrorPass1: true,
+                    disableErrorEmail: true,
+                    disableErrorName: true,
                 };
             },
 
             mounted: function () {
 
                 new Promise((r) => {
-                    helper.setWindowTitle('Criar dispositivo - Longinus')
-                    this.getDevice();
-                    this.validate();
+                    helper.setWindowTitle('Criar usuário - Longinus')
+                    this.getUser();
                     r();
                 }).then(() => {
                     M.AutoInit();
@@ -64,23 +68,33 @@ define([
 
                 validate() {
 
-                    this.isInvalid = this.description == '';
+                    this.disableErrorPass = this.pass1 == this.pass2;
+                    this.disableErrorPass1 = helper.validatePassword(this.pass1);
+                    this.disableErrorEmail = helper.validateEmail(this.email);
+                    this.disableErrorName = this.name != '';
+
+                    return (this.disableErrorPass && this.disableErrorPass1 && this.disableErrorEmail && this.disableErrorName)
 
                 },
 
-                getDevice() {
+                getUser() {
 
-                    if (app.device) {
+                    if (app.user) {
 
                         this.action = 'Editar';
-                        this.description = app.device.description;
-                        this.deviceType = app.device.deviceType;
+                        this.name = app.user.name;
+                        this.email = app.user.email;
+                        this.pass1 = 'the fake password';
+                        this.pass2 = 'the fake password';
+
 
                     } else {
 
                         this.action = 'Criar';
-                        this.description = '';
-                        this.deviceType = 'shield';
+                        this.name = '';
+                        this.email = '';
+                        this.pass1 = '';
+                        this.pass2 = '';
 
                     }
 
@@ -88,26 +102,37 @@ define([
 
                 save() {
 
-                    let device = {
-                        description: this.description,
-                        deviceType: this.deviceType,
-                        userId: app.loggedUser.id
-                    };
-                    let method = 'POST';
+                    if (this.validate()) {
 
-                    if (app.device) {
-                        device.id = app.device.id;
-                        method = 'PUT';
+                        let user = {
+                            email: this.email,
+                            name: this.name,
+                            hash: sha256(this.pass1)
+                        };
+                        let method = 'POST';
+
+                        if (app.user) {
+                            user.id = app.user.id;
+                            method = 'PUT';
+
+                            if (this.pass1 == 'the fake password') {
+                                delete user.hash;
+                            }
+                        }
+
+                        this.persistUser(user, method);
+
+
                     }
 
-                    this.persistDevice(device, method);
+
 
                 },
 
-                persistDevice(data, method) {
+                persistUser(data, method) {
 
                     const options = {
-                        url: config.serverUrl + '/device',
+                        url: config.serverUrl + '/user',
                         withCredentials: false,
                         headers: {
                             'Accept': 'application/json',
@@ -121,11 +146,19 @@ define([
                     axios(options)
                         .then(response => {
                             if (response.status < 400) {
-                                page.redirect('/devices');
+
+                                if (response.data.success) {
+                                    page.redirect('/users');
+                                } else {
+                                    this.$refs.messageBox.alert({
+                                        title: response.data.message
+                                    });
+                                }
+
                             } else {
                                 app.registerError({
                                     level: 0,
-                                    message: 'Não foi possível criar o dispositivo.',
+                                    message: 'Não foi possível criar o usuário.',
                                     raw: response
                                 });
                             }
