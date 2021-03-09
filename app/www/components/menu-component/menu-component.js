@@ -1,9 +1,9 @@
-define(['vue', 'materialize', 'text!menu-component/menu-component.html'], function (Vue, M, template) { // jshint ignore:line
+define(['vue', 'materialize', 'text!menu-component/menu-component.html', 'app'], function (Vue, M, template, app) { // jshint ignore:line
 
     return Vue.component('menu-component', {
         data: function () {
             return {
-                isActive: false,
+                isNormalUser: app.loggedUser.id != 1,
                 message: null
             }
         },

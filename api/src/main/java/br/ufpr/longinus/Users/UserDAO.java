@@ -21,7 +21,7 @@ public class UserDAO {
 
         this.connection = ConnectionFactory.getConnection();
         this.stmtCreate = this.connection.prepareStatement("insert into users (name,email,hash) values (?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        this.stmtList = this.connection.prepareStatement("select id, name, email from users");
+        this.stmtList = this.connection.prepareStatement("select id, name, email from users order by id");
         this.stmtGetUserLogin = this.connection.prepareStatement("select id, name from users where email = ? and hash = ?");
         this.stmtUpdate = this.connection.prepareStatement("update users set name=?, email=? where id=?;");
         this.stmtUpdate2 = this.connection.prepareStatement("update users set name=?, email=?, hash=? where id=?;");
