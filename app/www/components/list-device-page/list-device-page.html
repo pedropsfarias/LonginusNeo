@@ -18,11 +18,16 @@
                         <tr v-for="device in devices">
                             <td @mousedown="start(device)" @mouseleave="stop" @mouseup="stop"
                                 @touchstart="start(device)" @touchend="stop" @touchcancel="stop"
-                                @click="persistDevice(device)" class="ellipsis waves-effect w-100">
+                                @click="persistDevice(device)" v-bind:class="[{ 'w-80': isAndroid }, 'w-100']"
+                                class="ellipsis waves-effect">
                                 <span class="">
                                     <i class="material-icons grey-text left">{{device.deviceType}}</i>
                                     {{device.description}}
-                                    <i @click="startLocation(device)" v-if="isAndroid"
+                                </span>
+                            </td>
+                            <td @click="startLocation(device)" v-if="isAndroid" class="ellipsis waves-effect w-20">
+                                <span class="">
+                                    <i @click="startLocation(device)"
                                         class="material-icons right cyan-text text-darken-4">play_arrow</i>
                                 </span>
                             </td>

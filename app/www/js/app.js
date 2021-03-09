@@ -19,6 +19,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
             this._registerRoutes();
             this._checkPermissions();
             this._handleURL();
+            this._handleStatusBar();
 
         }
 
@@ -73,7 +74,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
                 } else {
 
-                    page.redirect('/position');
+                    page.redirect('/devices');
 
                 }
 
@@ -83,6 +84,13 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
 
             }
 
+        }
+
+        _handleStatusBar() {
+
+            if (typeof cordova != undefined && cordova.platformId == 'android') {
+                StatusBar.backgroundColorByHexString("#006064");
+            }
         }
 
         _checkPermissions() {
