@@ -7,9 +7,9 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
         deviceId = null;
         watchID = null;
         loggedUser = {
-            id: 1
+            id: 2
         } //TODO
-
+        intervalId = null;
         constructor() { }
 
         initialize() {
@@ -41,6 +41,7 @@ define(['vue', 'require', 'page', 'routes', 'store'], function (Vue, require, pa
                 const route = routes[i];
                 page(route.path, () => {
                     require([route.component], (page) => {
+                        clearInterval(this.intervalId);
                         this._vue.ViewComponent = page;
                     });
                 });

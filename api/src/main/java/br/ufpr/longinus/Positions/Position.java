@@ -1,5 +1,7 @@
 package br.ufpr.longinus.Positions;
 
+import br.ufpr.longinus.Devices.Device;
+
 public class Position {
 
     private int id;
@@ -20,7 +22,7 @@ public class Position {
 
     private String timestamp;
 
-    private int device_id;
+    private Device device;
 
     public Position() {
     }
@@ -97,11 +99,11 @@ public class Position {
         this.timestamp = timestamp;
     }
 
-    public int getDevice_id() {
-        return device_id;
+    public Device getDevice() {
+        return device;
     }
 
-    public void setDevice_id(int device_id) {
-        this.device_id = device_id;
+    public void setDevice(Device device) {
+        this.device = device;
     }
 }

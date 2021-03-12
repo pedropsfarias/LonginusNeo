@@ -1,6 +1,7 @@
 package br.ufpr.longinus.Positions;
 
 import br.ufpr.longinus.ConnectionFactory;
+import br.ufpr.longinus.Devices.Device;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class PositionDAO {
 
         this.connection = ConnectionFactory.getConnection();
         this.stmtCreate = this.connection.prepareStatement("insert into positions (latitude,longitude,altitude,accuracy,altitudeAccuracy,heading,speed,timestamp,device_id) values (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        this.stmtList = this.connection.prepareStatement("SELECT DISTINCT ON (t.device_id) * FROM   (select p.*  from positions p right join devices d on p.device_id = d.id  where d.user_id = ?) t ORDER  BY t.device_id, t.\"timestamp\" DESC NULLS LAST;\n");
+        this.stmtList = this.connection.prepareStatement("SELECT DISTINCT ON (t.device_id) * FROM   (select p.*, d.*  from positions p right join devices d on p.device_id = d.id  where d.user_id = ?) t ORDER  BY t.device_id, t.\"timestamp\" DESC NULLS LAST;\n");
 
     }
 
@@ -33,7 +34,7 @@ public class PositionDAO {
         this.stmtCreate.setFloat(6, position.getHeading());
         this.stmtCreate.setFloat(7, position.getSpeed());
         this.stmtCreate.setString(8, position.getTimestamp());
-        this.stmtCreate.setInt(9, position.getDevice_id());
+        this.stmtCreate.setInt(9, position.getDevice().getId());
 
         this.stmtCreate.execute();
 
@@ -53,6 +54,11 @@ public class PositionDAO {
 
         while (rs.next()) {
 
+            Device d = new Device();
+            d.setDescription(rs.getString("description"));
+            d.setUserId(rs.getInt("user_id"));
+            d.setDeviceType(rs.getString("device_type"));
+
             Position pos = new Position();
             pos.setId(rs.getInt("id"));
             pos.setLatitude(rs.getDouble("latitude"));
@@ -63,7 +69,7 @@ public class PositionDAO {
             pos.setHeading(rs.getFloat("heading"));
             pos.setSpeed(rs.getFloat("speed"));
             pos.setTimestamp(rs.getString("timestamp"));
-            pos.setDevice_id(rs.getInt("device_id"));
+            pos.setDevice(d);
 
             positions.add(pos);
 

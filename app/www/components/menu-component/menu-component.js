@@ -4,7 +4,6 @@ define(['vue', 'materialize', 'text!menu-component/menu-component.html', 'app'],
         data: function () {
             return {
                 isNormalUser: app.loggedUser.id != 1,
-                message: null
             }
         },
         template: template

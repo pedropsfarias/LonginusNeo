@@ -230,7 +230,7 @@ define([
                         heading: position.coords.heading,
                         speed: position.coords.speed,
                         timestamp: position.timestamp,
-                        device_id: app.deviceId
+                        device: { id: app.deviceId }
                     }
 
                     const options = {

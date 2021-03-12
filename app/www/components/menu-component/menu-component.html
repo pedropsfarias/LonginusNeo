@@ -4,11 +4,14 @@
             <a href="#" class="brand-logo"><img class="nav-logo" src="img/longinus.svg" alt="" srcset=""></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
+                <li><a href="/map">Mapa</a></li>
                 <li><a href="/devices">Dispostivos</a></li>
                 <li v-bind:class="{'d-none': isNormalUser}"><a href="/users">Usuários</a></li>
             </ul>
 
+
             <ul class="sidenav" id="mobile-demo">
+                <li><a href="/map">Mapa</a></li>
                 <li><a href="/devices">Dispositivos</a></li>
                 <li v-bind:class="{'d-none': isNormalUser}"><a href="/users">Usuários</a></li>
             </ul>

@@ -22,6 +22,10 @@ define([], function () { // jshint ignore:line
             path: '/users'
         },
         {
+            component: 'map-page/map-page',
+            path: '/map'
+        },
+        {
             component: 'login-page/login-page',
             path: '/login'
         },

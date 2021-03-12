@@ -1,0 +1,27 @@
+<div class="full">
+    <menu-component></menu-component>
+    <div class="container rounded-border white mt-1 ">
+
+        <div class="row">
+
+            <div class="col s12">
+                <p class="title cyan-text text-darken-4"><i class="material-icons left ">gps_fixed</i>Meus Dispositivos
+                </p>
+            </div>
+
+            <div id="map" class="input-field col s12 map h-70 rounded-border map-bg">
+            </div>
+
+            <div class="input-field col s12 rounded-border ">
+
+                <label>
+                    <input v-model="fit" type="checkbox" class="filled-in" />
+                    <span>Ver todos os dispositivos </span>
+                </label>
+
+            </div>
+
+        </div>
+        <loader-component v-bind:isActive="showLoader" v-bind:message="loaderMessage" />
+    </div>
+</div>
